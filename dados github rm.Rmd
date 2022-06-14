@@ -3,7 +3,8 @@ title: "Dados github"
 author: "Ana"
 date: "14/06/2022"
 output: html_document
----
+
+Packages
 ```{r}
 library(dplyr)
 require(readr)
@@ -32,7 +33,7 @@ temp_jj=dplyr::filter(seivatv,tempo <= "2018-06-01 01:00")
 
 
 
-
+Gráficos
 ```{r}
 # Plots 
 a1 =ggplot(temp_jj,aes(x=tempo,y=s1)) + geom_line() +ylab("Velocidade de seiva (cm/h)") + xlab("Tempo") + ggtitle("Swartzia recurva Poepp. - 2cm") 
@@ -63,7 +64,7 @@ h2 = ggplot(temp_jj,aes(x=tempo,y=s17)) + geom_line() +ylab("Velocidade de seiva
 ```
 
 
-
+Plots
 ```{r}
 ggplotly(a1)
 ggplotly(b1)
@@ -84,7 +85,7 @@ ggplotly(h1)
 ggplotly(h2)
 ```
 
-
+Uso de água
 ```{r}
 axa <- read.csv("~/pibic INPA 2021/Dados/areas.csv")
 #Swartzia recurva Poepp. - 2cm
