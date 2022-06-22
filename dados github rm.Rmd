@@ -31,14 +31,10 @@ seivatv$tempo <- tempo_sel
 temp_jj=dplyr::filter(seivatv,tempo <= "2018-06-01 01:00")
 ```
 
-
-
 Gráficos
 ```{r}
 # Plots 
 a1 =ggplot(temp_jj,aes(x=tempo,y=s1)) + geom_line() +ylab("Velocidade de seiva (cm/h)") + xlab("Tempo") + ggtitle("Swartzia recurva Poepp. - 2cm") 
-
-
 b1 = ggplot(temp_jj,aes(x=tempo,y=s2)) + geom_line() +ylab("Velocidade de seiva (cm/h)") + xlab("Tempo") + ggtitle("Goupia glabra Aubl. - 2cm")
 b2 = ggplot(temp_jj,aes(x=tempo,y=s3)) + geom_line() +ylab("Velocidade de seiva (cm/h)") + xlab("Tempo") + ggtitle("Goupia glabra Aubl. - 4cm")
 b3 = ggplot(temp_jj,aes(x=tempo,y=s4)) + geom_line() +ylab("Velocidade de seiva (cm/h)") + xlab("Tempo") + ggtitle("Goupia glabra Aubl. - 6cm")
@@ -62,7 +58,6 @@ g4=ggplot(temp_jj,aes(x=tempo,y=s15)) + geom_line() +ylab("Velocidade de seiva (
 h1 = ggplot(temp_jj,aes(x=tempo,y=s16)) + geom_line() +ylab("Velocidade de seiva (cm/h)") + xlab("Tempo") + ggtitle("Eschweilera romeu-cardosoi S.A Mori - 2cm") 
 h2 = ggplot(temp_jj,aes(x=tempo,y=s17)) + geom_line() +ylab("Velocidade de seiva (cm/h)") + xlab("Tempo") + ggtitle("Eschweilera romeu-cardosoi S.A Mori - 4cm")
 ```
-
 
 Plots
 ```{r}
@@ -88,19 +83,12 @@ ggplotly(h2)
 Uso de água
 ```{r}
 axa <- read.csv("~/pibic INPA 2021/Dados/areas.csv")
+
 #Swartzia recurva Poepp. - 2cm
 axaswartzia = axa[1,10]
-axaswartzia
 Vsswartzia = temp_jj$s1
-plot(Vsswartzia)
-usaswartzia=(axaswartzia*Vsswartzia) #fazer para todas as espécies e depois juntas e um dataframe
+usaswartzia=(axaswartzia*Vsswartzia)/1000 #fazer para todas as espécies e depois juntas e um dataframe
 
-
-
-
-sum(usaswartzia,na.rm=T)
-ds=data.frame(usaswartzia,temp_jj$tempo)
-View(ds)
 #Goupia glabra Aubl. - 2, 4 e 6cm
 axagoupia2 = axa[2,10]
 vsgoupia2 = temp_jj$s2
@@ -108,34 +96,34 @@ axagoupia4 = axa[2,11]
 vsgoupia4 = temp_jj$s3
 axagoupia6 = axa[2,12]
 vsgoupia6 = temp_jj$s4
-usagoupia = ((axagoupia2*vsgoupia2)+(axagoupia4*vsgoupia4)+(axagoupia6*vsgoupia6))
+usagoupia = (axagoupia2*vsgoupia2)/1000+(axagoupia4*vsgoupia4)/1000+(axagoupia6*vsgoupia6)/1000
 
 #Scleronema micranthum - 2 e 4cm
 axascl2 = axa[3, 10]
 vsscl2 = temp_jj$s5
 axascl4 = axa[3,11]
 vsscl4 = temp_jj$s6
-usacleronema = ((axascl2*vsscl2)+ (axascl4*vsscl4))
+usascleronema = ((axascl2*vsscl2)/1000+ (axascl4*vsscl4)/1000)
 
 #Eriotheca globosa Aubl. - 2cm e 4cm
 axaeriotheca2 = axa[4,10]
 axaeriotheca4 = axa [4,11]
 vseriotheca2 = temp_jj$s7
 vseriotheca4 = temp_jj$s8
-usaeriotheca = ((axaeriotheca2*vseriotheca2) + (axaeriotheca4*vseriotheca4))
+usaeriotheca = ((axaeriotheca2*vseriotheca2)/1000 + (axaeriotheca4*vseriotheca4)/1000)
 
 
 #Buchenavia grandis Ducke - 2cm 
 axabuchenavia = axa[5,10]
 vsbuchenavia = temp_jj$s9
-usabuchenavia = (axabuchenavia*vsbuchenavia) 
+usabuchenavia = (axabuchenavia*vsbuchenavia)/1000 
 
 #Maquira sclerophylla (Ducke) C. C. Berg. - 2cm e 4cm
 axamaquira2 = axa[6,10]
 axamaquira4 = axa[6,11]
 vsmaquira2= temp_jj$s10
 vsmaquira4 = temp_jj$s11
-usamaquira = ((axamaquira2*vsmaquira2) + (axamaquira4*vsmaquira4))
+usamaquira = ((axamaquira2*vsmaquira2)/1000 + (axamaquira4*vsmaquira4)/1000)
 
 #Ocotea nigrescens Vicent. - 2cm, 4cm, 6cm e 8cm
 axaocotea2 = axa[7,10]
@@ -146,28 +134,61 @@ vsocotea2 = temp_jj$s12
 vsocotea4 = temp_jj$s13
 vsocotea6 = temp_jj$s14
 vsocotea8 = temp_jj$s15
-usaocotea = ((axaocotea2*vsocotea2)+(axaocotea4*vsocotea4)+(axaocotea6*vsocotea6)+(axaocotea8*vsocotea8))
+usaocotea = ((axaocotea2*vsocotea2)/1000+(axaocotea4*vsocotea4)/1000+(axaocotea6*vsocotea6)/1000+(axaocotea8*vsocotea8)/1000)
 
 #Eschweilera romeu-cardosoi S.A Mori - 2cm e 4cm
 axaesc2 = axa[8,10]
 axaesc4 = axa[8,11]
 vsesc2 = temp_jj$s16
 vsesc4 = temp_jj$s17
-usaeschweilera = ((axaesc2*vsesc2)+ (axaesc4*vsesc4))
+usaeschweilera = ((axaesc2*vsesc2)/1000+ (axaesc4*vsesc4)/1000)
 
 
-UsoDeAgua=data.frame(usaswartzia, usagoupia, usacleronema, usaeriotheca, usabuchenavia, usaocotea, usaeschweilera, temp_jj$tempo)
+UsoDeAgua=data.frame(usaswartzia, usagoupia, usascleronema, usaeriotheca, usabuchenavia, usaocotea, usaeschweilera,time= temp_jj$tempo)
                      
 
-class(UsoDeAgua)
-View(UsoDeAgua)
+#exe = ggplot(ds,aes(x=temp_jj.tempo,y=usaswartzia)) + geom_line() +ylab("Uso de água") + xlab("Tempo") + ggtitle("Swartzia")
 
-exe = ggplot(ds,aes(x=temp_jj.tempo,y=usaswartzia)) + geom_line() +ylab("Uso de água") + xlab("Tempo") + ggtitle("Swartzia")
+```
+Plots
+```{r}
+#Swartzia
+ggplot(UsoDeAgua,aes(x=temp_jj$tempo,y=usaswartzia)) + geom_line() +ylab("Swartzia") + xlab("Tempo") + ggtitle("Uso de água")
+##ds=data.frame(uso=usaswartzia,time=temp_jj$tempo)
+#ggplot(ds,aes(time,uso)) + geom_point()
 
-exe
-ggplotly(exe)
 
+#Goupia
+ggplot(UsoDeAgua,aes(x=temp_jj$tempo,y=usagoupia)) + geom_line() +ylab("Goupia") + xlab("Tempo") + ggtitle("Uso de água")
 
+#Scleronema
+ggplot(UsoDeAgua,aes(x=temp_jj$tempo,y=usascleronema)) + geom_line() +ylab("Scleronema") + xlab("Tempo") + ggtitle("Uso de água")
+
+#Eriotheca
+ggplot(UsoDeAgua,aes(x=temp_jj$tempo,y=usaeriotheca)) + geom_line() +ylab("Eriotheca") + xlab("Tempo") + ggtitle("Uso de água")
+
+#Buchenavia
+ggplot(UsoDeAgua,aes(x=temp_jj$tempo,y=usabuchenavia)) + geom_line() +ylab("Buchenavia") + xlab("Tempo") + ggtitle("Uso de água")
+
+#Ocotea
+ggplot(UsoDeAgua,aes(x=temp_jj$tempo,y=usaocotea)) + geom_line() +ylab("Ocotea") + xlab("Tempo") + ggtitle("Uso de água")
+
+#Eschweilera
+ggplot(UsoDeAgua,aes(x=temp_jj$tempo,y=usaeschweilera)) + geom_line() +ylab("Eschweilera") + xlab("Tempo") + ggtitle("Uso de água")
+
+```
+
+```{r}
+colnames(UsoDeAgua)
+UsoDeAgua$data=as.Date(UsoDeAgua$time) #agrupando os dados dos dias em um só 
+
+Uda_dia =UsoDeAgua%>%group_by(data) %>% summarise(sp1=sum(usaswartzia,na.rm=T), sp2 = sum(usagoupia,na.rm=T), sp3= sum(usascleronema,na.rm=T), sp4 = sum(usaeriotheca,na.rm=T), sp5 = sum(usabuchenavia,na.rm=T), sp6 = sum(usaocotea,na.rm=T), sp7 = sum(usaeschweilera,na.rm=T)) #uso de água por dia
+
+View(Uda_dia)
+##Fazer os gráficos para cada dia
+ggplot(Uda_dia,aes(x=data,y=sp1)) + geom_point() +ylab("Eschweilera") + xlab("Tempo") + ggtitle("Uso de água/dia")
+
+#Média das variáveis ambientais por dia e fazer os gráficos
 ```
 
 
