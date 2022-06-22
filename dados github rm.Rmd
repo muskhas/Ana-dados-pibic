@@ -166,6 +166,8 @@ exe = ggplot(ds,aes(x=temp_jj.tempo,y=usaswartzia)) + geom_line() +ylab("Uso de 
 
 exe
 ggplotly(exe)
+
+
 ```
 
 
